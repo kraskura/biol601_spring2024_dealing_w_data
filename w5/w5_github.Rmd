@@ -1,13 +1,17 @@
 ---
-title: "R projects and version control using GitHub"
+title: "R projects and version control using GitHub- update"
 author: "Krista Kraskura"
-output: 
+output:
   html_document:
     theme: flatly
-    toc: yes
+    toc: true
     levels: 5
     toc_float:
       collapsed: false
+  pdf_document:
+    toc: true
+  word_document:
+    toc: true
 ---
 
 
