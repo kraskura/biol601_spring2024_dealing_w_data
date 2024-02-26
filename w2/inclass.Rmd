@@ -1,0 +1,68 @@
+---
+title: "R markdown intro"
+author: "Krista"
+date: "`r Sys.Date()`"
+output:
+  html_document: default
+  word_document: default
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Heading 1
+
+## Heading 2
+
+### Heading 3
+
+our first headings 
+
+
+_italics_
+*italics*
+
+**bold**
+
+***bold***
+
+- bullet point
+- point 2
+  * point 3
+
+[link](https://www.towson.edu/)
+
+```{r library chunk, echo=FALSE}
+library(ggplot2)
+library(here)
+library(knitr)
+
+here()
+# install.packages("here")
+
+```
+
+```{r read in data, echo=FALSE, include=FALSE}
+data <- read.csv(here("data","dfexample.csv"))
+
+```
+
+
+```{r display table }
+
+knitr::kable(data, 
+             digits = 2, 
+             align = "c", 
+             longtable = TRUE)
+
+```
+
+
+
+
+
+
+

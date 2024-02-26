@@ -11,7 +11,6 @@
 
 <meta name="author" content="Krista Kraskura" />
 
-<meta name="date" content="2024-01-26" />
 
 <title>R projects and version control using GitHub</title>
 
@@ -1506,56 +1505,22 @@ font-size: 0.95em;
 <h1 class="title toc-ignore">R projects and version control using
 GitHub</h1>
 <h4 class="author">Krista Kraskura</h4>
-<h4 class="date">2024-01-26</h4>
 
 </div>
 
 
-<div id="objectives-and-goals" class="section level2">
-<h2>Objectives and goals</h2>
+<div id="today-we-will" class="section level2">
+<h2>Today we will:</h2>
 <ol style="list-style-type: decimal">
-<li>to learn why GitHub?</li>
-<li>to estblish communication between RStudio and GitHub</li>
-<li>to establish system working with R projects and Github
+<li>talk about ‘why GitHub’?</li>
+<li>establish communication between RStudio and GitHub</li>
+<li>setup a workflow working with R projects and Github
 <ul>
-<li>create two repositories: 1) from existing local directory, 2) from
-Github account that are linked with Github.</li>
-<li>create README file using R markdown</li>
+<li>from existing local directory</li>
+<li>from Github account that are linked with Github.</li>
+<li>add README for each repo</li>
 </ul></li>
 </ol>
-</div>
-<div id="pre-requisites" class="section level2">
-<h2>Pre-requisites</h2>
-<ol style="list-style-type: decimal">
-<li>GitHub account (github.com)</li>
-<li>Installed git on the computer</li>
-<li>Upgrade your R or RStudio</li>
-</ol>
-<p><br /></p>
-<p><strong>Do I have git installed?</strong></p>
-<p>Newer computers come with git preinstalled. To check if git is
-installed, go to RStudio, find Terminal (likely next to the Console),
-open it and type in:</p>
-<pre class="r"><code># in Terminal:
-
-which git
-## /usr/bin/git 
-
-git --version
-## git version 2.43.0</code></pre>
-<p>If git is not installed, the messages will look different, and
-commang <code>git</code> will not be found.</p>
-<p>No git? No Probelem! Let’s follow <a href="https://happygitwithr.com/install-git">online guide</a> to install
-it.</p>
-<p><br /></p>
-<p><strong>Do I have the latest version of R?</strong></p>
-<p>Let’s check:</p>
-<pre class="r"><code># in RStudio Console:
-
-R.version.string
-#&gt; [1] &quot;R version 4.3.2 (2023-10-31)&quot;</code></pre>
-<p>Staying up to date with RStudio and R updates can save a lot of
-headache in the long run.</p>
 <p><br /></p>
 </div>
 <div id="why-github" class="section level2">
@@ -1571,13 +1536,71 @@ external collaborators)</li>
 </ul>
 <p><br /></p>
 </div>
-<div id="making-connections" class="section level2">
-<h2>Making connections</h2>
-<div id="make-your-git-yours" class="section level3">
-<h3>Make your git yours</h3>
+<div id="setup-pre-requisites" class="section level2">
+<h2>Setup pre-requisites:</h2>
+<ol style="list-style-type: decimal">
+<li>GitHub account (github.com)</li>
+<li>Installed git on the computer</li>
+<li>Upgrade your R or RStudio</li>
+</ol>
+<p>Then we get to create a workflow.</p>
+<p><br /></p>
+<p><strong>Do we have git installed?</strong></p>
+<p>Newer computers come with git pre-installed. To check if git is
+installed, go to RStudio, find Terminal (likely next to the Console),
+open it and type in:</p>
+<pre class="bash"><code># in Terminal:
+
+which git
+## /usr/bin/git</code></pre>
+<p>If git is not installed, the messages will look different, and
+command <code>git</code> will not be found.</p>
+<p>No git? No Problem! Let’s follow <a href="https://happygitwithr.com/install-git">online guide</a> to install
+it.</p>
+<p><strong>NOTE</strong>: When installing git for
+<strong>Windows</strong>:</p>
+<p>On prompt: “Adjusting your PATH environment” –&gt; select “Git from
+the command line and also from 3rd-party software”</p>
+<p>Local location: <code>C:/Program Files/Git/bin/git.exe</code></p>
+<p><strong>NOTE</strong>: When installing git for
+<strong>Macs</strong>:</p>
+<p>Use terminal commands to install it. Install the Xcode line tools
+with git.</p>
+<pre class="bash"><code># option 1: 
+git --version
+git config
+
+# alternative
+xcode-select --install
+</code></pre>
+<p><strong>Do we have the latest version of git?</strong></p>
+<pre class="bash"><code># check
+git --version
+# git version 2.43.0
+
+# if needed: update (for Wondows)
+git update git-for-windows
+
+# for macs
+</code></pre>
+<p><br /></p>
+<p><strong>Do we have the latest version of R?</strong></p>
+<p>Let’s check:</p>
 <pre class="r"><code># in RStudio Console:
 
-# instlal package if needed. need to do this only once 
+R.version.string
+#&gt; [1] &quot;R version 4.3.2 (2023-10-31)&quot;</code></pre>
+<p>Staying up to date with RStudio and R updates can save a lot of
+headache in the long run.</p>
+<p><br /></p>
+</div>
+<div id="making-connections" class="section level2">
+<h2>Making connections</h2>
+<div id="make-your-git-yours-done-once" class="section level3">
+<h3>Make your git yours (done ONCE)</h3>
+<pre class="r"><code># in RStudio Console:
+
+# install package if needed. need to do this only once 
 # install.packages(&quot;usethis&quot;) 
 library(usethis)
 
@@ -1590,6 +1613,7 @@ use_git_config(user.name = &quot;Firstnames Lastname&quot;,
 <pre class="r"><code># in RStudio Console:
 
 usethis::create_github_token()</code></pre>
+<p>We should be in a pop-up website window (on GitHub).</p>
 <p><strong>Click “Generate token”</strong>. Copy PAT and save it (leave
 the site open while working, in case if something gets lost).</p>
 <p>Now:</p>
@@ -1605,63 +1629,9 @@ gitcreds::gitcreds_set()
 Click “Generate token”. Select: “repo”, “user”, and “workflow”.</p>
 <p>Success?!</p>
 </div>
-<div id="github-and-rstudio-using-terminal" class="section level3">
-<h3>Github and Rstudio (using Terminal)</h3>
-<p>First, make repository (repo) on GitHub</p>
-<ul>
-<li>Repository Template: ‘no template’</li>
-<li>Repo Name: <em>something short and meaningful</em></li>
-<li>Enter a description for your repository</li>
-<li>Visibility: ‘Public’</li>
-<li>Select Initialize this repository with a README.</li>
-<li>Click Add .ignore and select R.</li>
-<li>Click Create repository.</li>
-</ul>
-<p>Then, clone it to your computer locally and connect with RStudio.</p>
-<ul>
-<li>On GitHub, find the ‘Code’ tab.</li>
-<li>Click Clone</li>
-<li>Select HTTPS (assuming its right)</li>
-<li>Copy the link</li>
-</ul>
-<pre class="r"><code># In Terminal:
-
-# to see the current wd (important, keep repos tidy together)
-pwd 
-
-# to change wd
-cd
-
-# clone the repo 
-# git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
-git clone https://github.com/kraskura/newrepo.git
-
-# change my wd to my new repo; assuming my repo is called 
-cd newrepo 
-
-# get info about the RStudio and GitHub connection
-git remote show origin
-
-# make a cahnge in README
-# ... 
-
-# check changes 
-git status
-
-# add changes to local repo memory 
-git add --all 
-git add README.md
-
-# commit added changes! -m initiated messages, use them
-git commit -m &quot;commit messages help me keep track&quot;
-
-# finally push the changes to the remote repo
-git push</code></pre>
-<p>Asked for password? for authentication? Update everything as
-prompted. <strong>the password is your PAT</strong></p>
 </div>
-<div id="github-and-rstudio-in-rstudio" class="section level3">
-<h3>Github and Rstudio (in RStudio)</h3>
+<div id="creating-workflow-in-rstudio" class="section level2">
+<h2>Creating workflow: in RStudio</h2>
 <p>First.</p>
 <ul>
 <li>Open RStudio</li>
@@ -1687,13 +1657,70 @@ remote repository.</li>
 <li>Go on Github and check out the changes</li>
 </ul>
 <p><br /></p>
-<p>No Git pane? maybe its not a git repo. Let’s check.</p>
-<pre class="r"><code># In Terminal 
+</div>
+<div id="creating-workflow-using-terminal" class="section level2">
+<h2>Creating workflow using Terminal</h2>
+<p>First, make repository (repo) on GitHub</p>
+<ul>
+<li>Repository Template: ‘no template’</li>
+<li>Repo Name: <em>something short and meaningful</em></li>
+<li>Enter a description for your repository</li>
+<li>Visibility: ‘Public’</li>
+<li>Select Initialize this repository with a README.</li>
+<li>Click Add .ignore and select R.</li>
+<li>Click Create repository.</li>
+</ul>
+<p>Then, clone it to your computer locally and connect with RStudio.</p>
+<ul>
+<li>On GitHub, find the ‘Code’ tab.</li>
+<li>Click Clone</li>
+<li>Select HTTPS (assuming its right)</li>
+<li>Copy the link</li>
+</ul>
+<pre class="bash"><code># In Terminal:
+
+# to see the current wd (important, keep repos tidy together)
+pwd 
+
+# to change wd
+cd [ENTER HERE]
+
+# clone the repo 
+# git clone https://github.com/YOUR-USERNAME/YOUR-REPOSITORY.git
+git clone https://github.com/kraskura/newrepo.git
+
+# change my wd to my new repo; assuming my repo is called 
+cd newrepo 
+
+# get info about the RStudio and GitHub connection
+git remote show origin
+
+# make a change in README
+# ... 
+
+# check changes 
 git status
 
-# fatal: not a git repository (or any of the parent directories): .git</code></pre>
+# add changes to local repo memory 
+git add --all 
+git add README.md
+
+# commit added changes! -m initiated messages, use them
+git commit -m &quot;commit messages help me keep track&quot;
+
+# finally push the changes to the remote repo
+git push
+</code></pre>
+<p>Asked for password? for authentication? Update everything as
+prompted. <strong>the password is your PAT</strong></p>
 <p><br /></p>
-</div>
+<p>No Git pane? maybe its not a git repo. Let’s check.</p>
+<pre class="bash"><code># In Terminal 
+git status
+
+# fatal: not a git repository (or any of the parent directories): .git
+</code></pre>
+<p><br /></p>
 </div>
 <div id="some-tips-and-final-notes-from-experience" class="section level2">
 <h2>Some tips and final notes from experience:</h2>

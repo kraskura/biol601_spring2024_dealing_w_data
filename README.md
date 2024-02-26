@@ -15,3 +15,4 @@ A graduate-level exploration of data management and analysis practices focused o
 After this course, students will be able to:
 1.	Complete basic data analysis and visualization in the statistical programming language R
 2.	Identify and implement commonly accepted practices for organizing, analyzing, sharing, communicating, and archiving scientific data 
+
